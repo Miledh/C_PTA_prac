@@ -10,8 +10,8 @@
 #include <stdio.h>
 
 struct factor {
-	int power; // 幂
-	int fac; // 系数
+    int power; // 幂
+    int fac;   // 系数
 };
 
 typedef struct factor FACTOR;
@@ -21,155 +21,155 @@ int searchf(int power_a, FACTOR b[], int len_b);
 
 int main(void)
 {
-	FACTOR a[100], b[100];
+    FACTOR a[100], b[100];
 
-	int i = -1;
-	do {
-		i++;
-		scanf("%d%d", &a[i].power, &a[i].fac);
-	} while (a[i].power != 0);
-	int num_a = i + 1;
-	sortf(a, num_a);
+    int i = -1;
+    do {
+        i++;
+        scanf("%d%d", &a[i].power, &a[i].fac);
+    } while (a[i].power != 0);
+    int num_a = i + 1;
+    sortf(a, num_a);
 
-	i = -1;
-	do {
-		i++;
-		scanf("%d%d", &b[i].power, &b[i].fac);
-	} while (b[i].power != 0);
-	int num_b = i + 1;
-	sortf(b, num_b);
+    i = -1;
+    do {
+        i++;
+        scanf("%d%d", &b[i].power, &b[i].fac);
+    } while (b[i].power != 0);
+    int num_b = i + 1;
+    sortf(b, num_b);
 
-	FACTOR c[100];
-	int num_c, index;
-	for (num_c = 0; num_c < num_a; num_c++) {
-		index = searchf(a[num_c].power, b, num_b);
-		if (index != -1) {
-			c[num_c].fac = a[num_c].fac + b[index].fac;
-			c[num_c].power = a[num_c].power;
-			b[index].fac = 111;
-			b[index].power = 111;
-		} else {
-			c[num_c] = a[num_c];
-		}
-	}
-	for (int j = 0; j < num_b; j++) {
-		if (b[j].power != 111) {
-			c[num_c++] = b[j];
-		}
-	}
-	sortf(c, num_c);
-        
-	int count_0_fac = 0;
-	int k;
-	for (k = 0;; k++) {
-		if (c[k].power <= 1) {
-			break;
-		}
-		if (c[k].fac != 0) {
-			if (count_0_fac == k) {
-				if (c[k].fac == 1) {
-					printf("x%d", c[k].power);
-				} else {
-					printf("%dx%d", c[k].fac, c[k].power);
-				}
-			} else {
-				if (c[k].fac == 1) {
-					printf("+x%d", c[k].power);
-				} else if (c[k].fac > 0) {
-					printf("+%dx%d", c[k].fac, c[k].power);
-				} else {
-					printf("%dx%d", c[k].fac, c[k].power);
-				}
-			}
-		} else {
-			count_0_fac++;
-		}
-	}
+    FACTOR c[100];
+    int num_c, index;
+    for (num_c = 0; num_c < num_a; num_c++) {
+        index = searchf(a[num_c].power, b, num_b);
+        if (index != -1) {
+            c[num_c].fac = a[num_c].fac + b[index].fac;
+            c[num_c].power = a[num_c].power;
+            b[index].fac = 111;
+            b[index].power = 111;
+        } else {
+            c[num_c] = a[num_c];
+        }
+    }
+    for (int j = 0; j < num_b; j++) {
+        if (b[j].power != 111) {
+            c[num_c++] = b[j];
+        }
+    }
+    sortf(c, num_c);
 
-	if (c[k].power == 1) {
-		if (c[k].fac != 0) {
-			if (count_0_fac == k) {
-				if (c[k].fac == 1) {
-					printf("x");
-				} else {
-					printf("%dx", c[k].fac);
-				}
-			} else {
-				if (c[k].fac == 1) {
-					printf("+x");
-				} else if (c[k].fac > 0) {
-					printf("+%dx", c[k].fac);
-				} else {
-					printf("%dx", c[k].fac);
-				}
-			}
-		} else {
-			count_0_fac++;
-		}
-		k++;
-	}
+    int count_0_fac = 0;
+    int k;
+    for (k = 0;; k++) {
+        if (c[k].power <= 1) {
+            break;
+        }
+        if (c[k].fac != 0) {
+            if (count_0_fac == k) {
+                if (c[k].fac == 1) {
+                    printf("x%d", c[k].power);
+                } else {
+                    printf("%dx%d", c[k].fac, c[k].power);
+                }
+            } else {
+                if (c[k].fac == 1) {
+                    printf("+x%d", c[k].power);
+                } else if (c[k].fac > 0) {
+                    printf("+%dx%d", c[k].fac, c[k].power);
+                } else {
+                    printf("%dx%d", c[k].fac, c[k].power);
+                }
+            }
+        } else {
+            count_0_fac++;
+        }
+    }
 
-	if (c[k].power == 0) {
-		if (c[k].fac != 0) {
-			if (count_0_fac == k) {
-				printf("%d", c[k].fac);
-			} else {
-				if (c[k].fac > 0) {
-					printf("+%d", c[k].fac);
-				} else {
-					printf("%d", c[k].fac);
-				}
-			}
-		} else {
-			count_0_fac++;
-		}
-	}
+    if (c[k].power == 1) {
+        if (c[k].fac != 0) {
+            if (count_0_fac == k) {
+                if (c[k].fac == 1) {
+                    printf("x");
+                } else {
+                    printf("%dx", c[k].fac);
+                }
+            } else {
+                if (c[k].fac == 1) {
+                    printf("+x");
+                } else if (c[k].fac > 0) {
+                    printf("+%dx", c[k].fac);
+                } else {
+                    printf("%dx", c[k].fac);
+                }
+            }
+        } else {
+            count_0_fac++;
+        }
+        k++;
+    }
 
-	if (count_0_fac == num_c) {
-		printf("0");
-	}
+    if (c[k].power == 0) {
+        if (c[k].fac != 0) {
+            if (count_0_fac == k) {
+                printf("%d", c[k].fac);
+            } else {
+                if (c[k].fac > 0) {
+                    printf("+%d", c[k].fac);
+                } else {
+                    printf("%d", c[k].fac);
+                }
+            }
+        } else {
+            count_0_fac++;
+        }
+    }
 
-	return 0;
+    if (count_0_fac == num_c) {
+        printf("0");
+    }
+
+    return 0;
 }
 
 void sortf(FACTOR a[], int len_a)
 {
-	for (int i = 0; i < len_a - 1; i++) {
-		for (int num_c = i; num_c < len_a; num_c++) {
-			if (a[i].power < a[num_c].power) {
-				FACTOR temp;
-				temp = a[i];
-				a[i] = a[num_c];
-				a[num_c] = temp;
-			}
-		}
-	}
+    for (int i = 0; i < len_a - 1; i++) {
+        for (int num_c = i; num_c < len_a; num_c++) {
+            if (a[i].power < a[num_c].power) {
+                FACTOR temp;
+                temp = a[i];
+                a[i] = a[num_c];
+                a[num_c] = temp;
+            }
+        }
+    }
 }
 
 int searchf(int power_a, FACTOR b[], int len_b)
 {
-	int ret = -1;
-	int left = 0, right = len_b - 1;
-	int mid = (left + right) / 2;
-	while (mid != left) {
-		if (power_a == b[mid].power) {
-			ret = mid;
-			break;
-		} else if (power_a > b[mid].power) {
-			right = mid;
-			mid = (left + right) / 2;
-		} else {
-			left = mid;
-			mid = (left + right) / 2;
-		}
-	}
-	if (power_a == b[left].power) {
-		ret = left;
-	} else if (power_a == b[right].power) {
-		ret = right;
-	}
+    int ret = -1;
+    int left = 0, right = len_b - 1;
+    int mid = (left + right) / 2;
+    while (mid != left) {
+        if (power_a == b[mid].power) {
+            ret = mid;
+            break;
+        } else if (power_a > b[mid].power) {
+            right = mid;
+            mid = (left + right) / 2;
+        } else {
+            left = mid;
+            mid = (left + right) / 2;
+        }
+    }
+    if (power_a == b[left].power) {
+        ret = left;
+    } else if (power_a == b[right].power) {
+        ret = right;
+    }
 
-	return ret;
+    return ret;
 }
 
 /*
