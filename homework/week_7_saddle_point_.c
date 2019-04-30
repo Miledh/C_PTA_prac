@@ -80,7 +80,9 @@ struct pt maxInd(int **a, int col, int row)
 				break;
 			}
 		}
-		if (maxind.col != -1 || maxind.row != -1) {
+		// 找到了鞍点，只要找到第一个鞍点就可以结束查找了，
+		// 即使后面还有鞍点也不再查找——题目保证不会有多个鞍点的意思也在于此。
+        if (maxind.col != -1 || maxind.row != -1) {
 			break;
 		}
 	}
